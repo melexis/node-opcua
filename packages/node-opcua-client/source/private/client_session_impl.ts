@@ -107,6 +107,7 @@ import { ClientSidePublishEngine } from "./client_publish_engine";
 import { ClientSubscriptionImpl } from "./client_subscription_impl";
 import { OPCUAClientImpl } from "./opcua_client_impl";
 import { BrowseNextRequest, BrowseNextResponse } from "node-opcua-types";
+import { OpaqueStructure } from "node-opcua-extension-object";
 
 export type ResponseCallback<T> = (err: Error | null, response?: T) => void;
 
@@ -1088,7 +1089,12 @@ export class ClientSessionImpl extends EventEmitter implements ClientSession {
 
             response.results = response.results || [];
 
-            return callback(null, isArray ? response.results : response.results[0]);
+            // perform ExtensionObject resolution
+            response.results.map((dataValue) => {
+               //xx resolveDynamicExtensionObject(dataValue.value);
+            });
+
+            return callback(null,  isArray ? response.results : response.results[0]);
 
         });
     }
