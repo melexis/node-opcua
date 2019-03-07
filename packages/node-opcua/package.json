@@ -57,7 +57,8 @@
         "semver": "^5.6.0"
     },
     "devDependencies": {
-        "should": "13.2.3"
+        "should": "13.2.3",
+        "lerna": "^3.13.1"
     },
     "author": "Etienne Rossignon",
     "license": "MIT",
