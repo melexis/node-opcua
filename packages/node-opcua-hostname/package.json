@@ -1,7 +1,7 @@
 {
  "name": "node-opcua-hostname",
  "main": "./src/hostname.js",
- "version": "0.5.9-mlx.2",
+ "version": "0.5.9-mlx.3",
  "description": "pure nodejs OPCUA SDK - module -hostname",
  "scripts": {
   "test": "mocha test"
