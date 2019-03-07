@@ -10,7 +10,7 @@ const trim = function (str, length) {
 
 let _fully_qualified_domain_name_cache = null;
 
-function get_fully_qualified_domain_name2(optional_max_length) {
+function get_fully_qualified_domain_name(optional_max_length) {
     if (_fully_qualified_domain_name_cache) {
         return trim(_fully_qualified_domain_name_cache, optional_max_length);
     }
