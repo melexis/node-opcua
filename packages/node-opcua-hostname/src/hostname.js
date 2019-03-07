@@ -1,5 +1,6 @@
 "use strict";
 const os = require("os");
+const childProcess = require("child_process");
 
 const trim = function (str, length) {
     if (!length) {
@@ -23,13 +24,8 @@ function get_fully_qualified_domain_name(optional_max_length) {
         _fully_qualified_domain_name_cache = fqdn;
 
     } else {
-        console.log(env);
-        const hostname = os.hostname();
-        if (env.DOMAIN) {
-            _fully_qualified_domain_name_cache = hostname + "." + env.DOMAIN;
-        } else {
-            _fully_qualified_domain_name_cache = hostname;
-        }
+        const hostname = childProcess.execSync("hostname", ["-f"]);
+        _fully_qualified_domain_name_cache = hostname.toString().trim();
     }
     return trim(_fully_qualified_domain_name_cache, optional_max_length);
 }
