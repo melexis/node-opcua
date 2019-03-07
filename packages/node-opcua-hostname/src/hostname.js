@@ -1,5 +1,6 @@
 "use strict";
 const os = require("os");
+const dns = require("dns");
 
 const trim = function (str, length) {
     if (!length) {
@@ -24,19 +25,21 @@ function get_fully_qualified_domain_name(optional_max_length) {
 
     } else {
 
-        fqdn = null;
-        try {
-            fqdn = require("fqdn");
-            _fully_qualified_domain_name_cache = fqdn();
-            if (/sethostname/.test(_fully_qualified_domain_name_cache)) {
-                throw new Error("Detecting fqdn  on windows !!!");
+        const hostname = os.hostname();
+        dns.
+        dns.lookup(hostname, (err, ip) => {
+            if (err) {
+                _fully_qualified_domain_name_cache = os.hostname();
+            } else {
+                dns.lookupService(ip, 0, (err, hostname, p) => {
+                    if (err) {
+                        _fully_qualified_domain_name_cache = os.hostname();
+                    } else {
+                        _fully_qualified_domain_name_cache = hostname
+                    }
+                });
             }
-
-        } catch (err) {
-            // fall back to old method
-            _fully_qualified_domain_name_cache = os.hostname();
-        }
-
+        });
     }
     return trim(_fully_qualified_domain_name_cache, optional_max_length);
 }
