@@ -26,16 +26,15 @@ function get_fully_qualified_domain_name(optional_max_length) {
     } else {
 
         const hostname = os.hostname();
-        dns.
         dns.lookup(hostname, (err, ip) => {
             if (err) {
                 _fully_qualified_domain_name_cache = os.hostname();
             } else {
-                dns.lookupService(ip, 0, (err, hostname, p) => {
+                dns.lookupService(ip, 0, (err, hostname) => {
                     if (err) {
                         _fully_qualified_domain_name_cache = os.hostname();
                     } else {
-                        _fully_qualified_domain_name_cache = hostname
+                        _fully_qualified_domain_name_cache = hostname;
                     }
                 });
             }
